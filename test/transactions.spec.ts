@@ -39,6 +39,10 @@ it('should ble able to list all transactions', async () => {
 
     const cookies = createTransactionResponse.get('Set-Cookie')
 
+    if (!cookies) {
+        throw new Error('Set-Cookie header not found in the response');
+    }
+
     const listTransactionsResponse = await request(app.server)
         .get('/transactions')
         .set('Cookie', cookies)
@@ -62,6 +66,10 @@ it('should ble able to get a especific transaction', async () => {
     })
 
     const cookies = createTransactionResponse.get('Set-Cookie')
+
+    if (!cookies) {
+        throw new Error('Set-Cookie header not found in the response');
+    }
 
     const listTransactionsResponse = await request(app.server)
         .get('/transactions')
